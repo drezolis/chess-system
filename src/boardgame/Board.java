@@ -25,4 +25,14 @@ public class Board {
     public void setColums(int colums) {
         this.colums = colums;
     }
+
+    //método que retorna a posição da peça na matriz
+    public Piece piece(int row, int column){
+        return pieces[row][column];
+    }
+
+    //sobrecarga do método piece
+    public Piece piece(Position position){
+        return pieces[position.getRow()][position.getColumn()];
+    }
 }
