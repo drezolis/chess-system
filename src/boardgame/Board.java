@@ -26,7 +26,7 @@ public class Board {
         this.colums = colums;
     }
 
-    //método que retorna a posição da peça na matriz
+    // Método que retorna a posição da peça na matriz.
     public Piece piece(int row, int column){
         return pieces[row][column];
     }
@@ -34,5 +34,10 @@ public class Board {
     //sobrecarga do método piece
     public Piece piece(Position position){
         return pieces[position.getRow()][position.getColumn()];
+    }
+
+    public void placePiece(Piece piece, Position position){
+        pieces[position.getRow()][position.getColumn()] = piece;
+        piece.position = position;
     }
 }
