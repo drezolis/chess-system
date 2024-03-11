@@ -2,7 +2,6 @@ package boardgame;
 
 public class Piece {
 
-    // posição simples de matriz
     protected Position position;
     private Board board;
 
