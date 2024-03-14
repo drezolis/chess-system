@@ -6,11 +6,10 @@ import boardgame.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
 
-public class ChessMatch {
+import java.util.ArrayList;
+import java.util.List;
 
-    // Conceito importante de composição. Basicamente significa "uma partida de
-    // xadrez (ChessMatch) TEM UM tabuleiro (Board)"
-    private Board board;
+public class ChessMatch {
 
     public int turn;
     public Color currentPlayer;
@@ -18,6 +17,13 @@ public class ChessMatch {
     public boolean checkMate;
     public ChessPiece enPassantVulnerable;
     public ChessPiece promoted;
+
+    // Conceito importante de composição. Basicamente significa "uma partida de
+    // xadrez (ChessMatch) TEM UM tabuleiro (Board)"
+    private Board board;
+
+    private List<Piece> piecesOnTheBoard = new ArrayList<>();
+    private List<Piece> capturedPieces = new ArrayList<>();
 
     public ChessMatch() {
         board = new Board(8, 8);
@@ -70,6 +76,12 @@ public class ChessMatch {
         Piece p = board.removePiece(source);
         Piece capturedPiece = board.removePiece(target);
         board.placePiece(p, target);
+
+        if (capturedPiece != null){
+            piecesOnTheBoard.remove(capturedPiece);
+            capturedPieces.add(capturedPiece);
+        }
+
         return capturedPiece;
     }
 
@@ -98,6 +110,7 @@ public class ChessMatch {
 
     private void placeNewPiece(char column, int row, ChessPiece piece){
         board.placePiece(piece, new ChessPosition(column, row).toPosition());
+        piecesOnTheBoard.add(piece);
     }
 
     private void initialSetup() {
